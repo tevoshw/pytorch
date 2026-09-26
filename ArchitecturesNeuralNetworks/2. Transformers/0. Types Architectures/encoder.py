@@ -197,10 +197,10 @@ class TransformerBlock(nn.Module):
 
 
 
-class BERT(nn.Module):
+class Encoder(nn.Module):
     """
 
-        Class BERT (MAIN):
+        Class Encoder (MAIN):
         The main class, control all, this part it's here we connect the:
             - Embedding + TransformersBlock + Logits
 
@@ -255,4 +255,4 @@ class BERT(nn.Module):
 
             return logits
 
-model = BERT(**config.dict())
+model = Encoder(**config.dict())

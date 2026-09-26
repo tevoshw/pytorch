@@ -197,10 +197,10 @@ class TransformerBlock(nn.Module):
 
 
 
-class BERT(nn.Module):
+class GPT(nn.Module):
     """
 
-        Class BERT (MAIN):
+        Class GPT (MAIN):
         The main class, control all, this part it's here we connect the:
             - Embedding + TransformersBlock + Logits
 
@@ -254,4 +254,4 @@ class BERT(nn.Module):
 
             return logits
 
-model = BERT(**config.dict())
+model = GPT(**config.dict())
