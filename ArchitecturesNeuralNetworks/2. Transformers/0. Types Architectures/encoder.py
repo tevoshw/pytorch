@@ -14,12 +14,11 @@ Encoder ALGORITHM BY SCRATCH IN PYTORCH, the main ideia and structure:
 import torch 
 import torch.nn as nn
 import torch.nn.functional as F
-import numpy as np
 from pydantic import BaseModel, Field
 
 
 # Global Variables
-VOCAB_SIZE = 50.257
+VOCAB_SIZE = 50257
 MAX_SEQ_LEN = 512
 D_MODEL = 768
 NHEADS = 12
@@ -49,11 +48,11 @@ config = BERTConfig(
 )
 
 
-class Attention(nn.Module):
+class MultiHeadAttention(nn.Module):
 
     """
-        Class Attention:
-            Self attetion algorithm from scratch with no masked (ENCODER)
+        Class MultiHeadAttention:
+            Self multi head attetion algorithm from scratch with no masked (ENCODER)
 
         Args:
             d_model = number of dimensions that each token gonna be
@@ -104,6 +103,17 @@ class Attention(nn.Module):
             is_causal = False,
             dropout_p = 0.15
         )
+
+        """
+        If you want more control and do all from scratch you can do the code:
+
+        scores = (Q @ K.tranpose(-1, -2)) / math.sqrt(d_k) # Here calculate the scores and normalize them
+        scores = F.softmax(scores, dim = 1) # Applie the softmax for each token
+        scores = scores @ V # Get the new values of the embedding
+
+        
+        """
+
 
         scores = scores.transpose(1, 2).reshape(b, t, self.d_model) # Return to (B, T, D_MODEL)
         out_proj =  self.wO(scores) # (B, T, D_MODEL)
@@ -172,13 +182,13 @@ class TransformerBlock(nn.Module):
     def __init__(self, d_model: int, nheads: int) -> None:
         super().__init__()
 
-        self.attn = Attention(d_model, nheads)
+        self.attn = MultiHeadAttention(d_model, nheads)
         self.ffn = FeedForwardNetwork(d_model)
 
         self.layernorm1 = nn.LayerNorm(d_model)
         self.layernorm2 = nn.LayerNorm(d_model)
 
-    def forward(self, x) -> torch.Tensor:
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
 
         x = self.layernorm1(x + self.attn(x))
         x = self.layernorm2(x + self.ffn(x))
@@ -232,7 +242,7 @@ class BERT(nn.Module):
         self.logits = nn.Linear(d_model, num_classes)
 
 
-    def forward(self, x: np.ndarray) -> torch.Tensor:
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
             b, t =   x.shape
     
             x = self.embedding(x) + self.pos_embedding(torch.arange(t, device = x.device)) # 1. Embedding
