@@ -1,10 +1,17 @@
 # 1. Core
-# 1.1 AutoGrad e compilação
-# 2. Neural Networks
-# 3. Dados
-# 4. Otimização e Treinamento
-# 5. Distribuido
-# 6. Deploy & Expert
-# 7. Profiling e Debug
-# 8. Quantização
+- Fundamentos de PyTorch
 
+# 2. Data 
+- Tudo sobre dados em Pytorch
+
+# 3. NeuralNetworks
+- Tudo sobre o .nn
+
+# 4. Architectures NeuralNetowks
+- Arquiteturas de modelos famosos e algoritmos em pytorch
+
+# 5. Treino e em escala
+
+# 6. Inferencia de modelose & Serving
+
+# 7. 
