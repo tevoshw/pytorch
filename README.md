@@ -1,5 +1,12 @@
 # 1. Core
 - Fundamentos de PyTorch
+1. Tensores
+2. Dtype
+3. Gradiente
+4. Dtype
+5. Device
+6. CUDA
+
 
 # 2. Data 
 - Tudo sobre dados em Pytorch
