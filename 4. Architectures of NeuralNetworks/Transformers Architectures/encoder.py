@@ -25,9 +25,9 @@ NHEADS = 12
 NBLOCKS = 12
 NUM_CLASSES = 1
 
-class BERTConfig(BaseModel):
+class EncoderCONFIG(BaseModel):
     """
-        Class BERT: Configure the right values for each args
+        Class EncoderCONFIG: Configure the right values for each args
 
     """
 
@@ -38,7 +38,7 @@ class BERTConfig(BaseModel):
     nblocks: int = Field(..., gt=0)
     num_classes: int = Field(..., gt=0)
 
-config = BERTConfig(
+config = EncoderCONFIG(
     vocab_size = VOCAB_SIZE,
     max_seq_len = MAX_SEQ_LEN,
     d_model = D_MODEL,
